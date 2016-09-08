@@ -14,6 +14,28 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
+" My Bundles here:
+" original repos on github
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+
+" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+
+" ...
+" filetype plugin indent on     "auto align with the beginning of previous line
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+
 "------------------
 " Code Completions
 "------------------
@@ -46,6 +68,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 "--------------
 " IDE features
 "--------------
+Bundle 'minibufexpl.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'humiaozuzu/TabBar'
 Bundle 'majutsushi/tagbar'
@@ -54,6 +77,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
+" airline replace powerline
 " Bundle 'Lokaltog/vim-powerline'
 Bundle 'bling/vim-airline'
 Bundle 'scrooloose/syntastic'
