@@ -33,10 +33,17 @@ nnoremap ; :
 " Keybindings for plugin toggle
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
-nmap <F5> :TagbarToggle<cr>
-nmap <F9> :NERDTreeToggle<cr>
 nmap <F3> :GundoToggle<cr>
 " nmap <F4> :IndentGuidesToggle<cr>
+let g:ctrlp_map = '<F6>'
+nmap <F5> :TagbarToggle<cr>
+"nmap <F7> :call Runshell("Generate tags","ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
+nmap <F7> :call Runshell("Generate tags","gtags")<cr>
+" nmap <F8> :call Runshell("Generate cscope","cscope -Rbk")<cr>:cs reset<cr><cr>
+nmap <F8> :call Runshell("Generate gtags-cscope","global -u")<cr>:cs reset<cr><cr>: echo "globl update done ..." <cr>
+nmap <F9> :NERDTreeToggle<cr>
+nmap <F11> :sp<cr>
+nmap <F12> :vsp<cr>
 nmap  <D-/> :
 
 function! Runshell(Msg, Shell)
@@ -45,10 +52,6 @@ function! Runshell(Msg, Shell)
     echon 'done'
 endfunction
 
-"nmap <F7> :call Runshell("Generate tags","ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
-nmap <F7> :call Runshell("Generate tags","gtags")<cr>
-" nmap <F8> :call Runshell("Generate cscope","cscope -Rbk")<cr>:cs reset<cr><cr>
-nmap <F8> :call Runshell("Generate gtags-cscope","global -u")<cr>:cs reset<cr><cr>: echo "globl update done ..." <cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
 
 "back to reviews
@@ -232,7 +235,8 @@ let g:miniBufExplMapWindowNavVim = 1
 " CtrlP
 """"""""""""""""""""""""""""""
 " Bundle 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<leader>p'
+" let g:ctrlp_map = '<F6>'
+" let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>f :CtrlPMRU<CR>
 let g:ctrlp_custom_ignore = {
