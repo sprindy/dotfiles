@@ -42,7 +42,7 @@ nmap <F7> :call Runshell("Generate tags","gtags")<cr>
 " nmap <F8> :call Runshell("Generate cscope","cscope -Rbk")<cr>:cs reset<cr><cr>
 nmap <F8> :call Runshell("Generate gtags-cscope","global -u")<cr>:cs reset<cr><cr>: echo "globl update done ..." <cr>
 nmap <F9> :NERDTreeToggle<cr>
-nmap <F11> :sp<cr>
+nmap <F10> :sp<cr>
 nmap <F12> :vsp<cr>
 nmap  <D-/> :
 
