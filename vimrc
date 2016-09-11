@@ -35,8 +35,8 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 nmap <F3> :GundoToggle<cr>
 " nmap <F4> :IndentGuidesToggle<cr>
-let g:ctrlp_map = '<F6>'
 nmap <F5> :TagbarToggle<cr>
+let g:ctrlp_map = '<F6>'
 "nmap <F7> :call Runshell("Generate tags","ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
 nmap <F7> :call Runshell("Generate tags","gtags")<cr>
 " nmap <F8> :call Runshell("Generate cscope","cscope -Rbk")<cr>:cs reset<cr><cr>
@@ -45,6 +45,21 @@ nmap <F9> :NERDTreeToggle<cr>
 nmap <F10> :sp<cr>
 nmap <F12> :vsp<cr>
 nmap  <D-/> :
+
+" the shift of 0 is ) and 9 is (, and avoid input shift key
+nmap <leader>0 :vertical resize +4<cr>
+nmap <leader>9 :vertical resize -4<cr>
+
+"auto complete the partner and move cursor to the middle in INSERT mode
+:inoremap ) ()<Esc>i
+:inoremap ( ()<Esc>i
+:inoremap { {}<Esc>i
+:inoremap } {}<Esc>i
+:inoremap [ []<Esc>i
+:inoremap ] []<Esc>i
+:inoremap < <><Esc>i
+:inoremap > <><Esc>i
+:inoremap ' ''<Esc>i
 
 function! Runshell(Msg, Shell)
     echo a:Msg . '...'
