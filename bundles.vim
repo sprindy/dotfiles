@@ -70,7 +70,8 @@ Bundle 'nathanaelkane/vim-indent-guides'
 "--------------
 Bundle 'minibufexpl.vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'humiaozuzu/TabBar'
+" replaced by minibufexplorer
+" Bundle 'humiaozuzu/TabBar'
 Bundle 'majutsushi/tagbar'
 " Bundle 'mileszs/ack.vim'
 " ag.vim replace ack.vim
