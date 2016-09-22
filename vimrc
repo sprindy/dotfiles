@@ -16,6 +16,17 @@ set shiftwidth=4
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " Key Remap
 """"""""""""""""""""""""""""""
+" nmap(noremap): no recursion map
+" Command Normal Visual Insert Command_Line Operator_Pending
+" :map      Y      Y                            Y
+" :nmap     Y
+" :vmap            Y
+" :map!                   Y         Y
+" :imap                   Y
+" :cmap                             Y
+" :omap                                         Y
+
+
 " Map space as hot key
 nmap <space> <leader>
 " led mapleader = " "
@@ -38,17 +49,25 @@ nmap <F3> :GundoToggle<cr>
 nmap <F5> :TagbarToggle<cr>
 let g:ctrlp_map = '<F6>'
 "nmap <F7> :call Runshell("Generate tags","ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
-nmap <F7> :call Runshell("Generate tags","gtags")<cr>
+" nmap <F7> :call Runshell("Generate tags","gtags")<cr>
+nmap <F7> :call GenGtagsFile()<cr><cr>
 " nmap <F8> :call Runshell("Generate cscope","cscope -Rbk")<cr>:cs reset<cr><cr>
-nmap <F8> :call Runshell("Generate gtags-cscope","global -u")<cr>:cs reset<cr><cr>: echo "globl update done ..." <cr>
+" can't update from gtags.files
+" nmap <F8> :call Runshell("Generate gtags","global -u")<cr>:cs reset<cr><cr>: echo "globl update done ..." <cr>
 nmap <F9> :NERDTreeToggle<cr>
-nmap <F10> :sp<cr>
-nmap <F12> :vsp<cr>
+nmap <F10> :vsplit<CR>
+" used for toggle mouse
+" nmap <F12> :vsp<cr>
 nmap  <D-/> :
 
-" the shift of 0 is ) and 9 is (, and avoid input shift key
-nmap <leader>0 :vertical resize +4<cr>
-nmap <leader>9 :vertical resize -4<cr>
+" vertical resize
+nmap <leader>] :vertical resize +4<cr>
+nmap <leader>[ :vertical resize -4<cr>
+
+" map save and quit
+nmap <leader>w :w<cr>
+nmap <leader>q :q<cr>
+nmap <leader>wq :wq<cr>
 
 "auto complete the partner and move cursor to the middle in INSERT mode
 :inoremap ) ()<Esc>i
@@ -67,6 +86,10 @@ function! Runshell(Msg, Shell)
     echon 'done'
 endfunction
 
+function! GenGtagsFile()
+	call Runshell("GenGtagsFileList", "find $PWD -path \"$PWD/bootloader*\" -prune -o -name \"*.[chxsS]\" -print >$PWD/gtags.files")
+	call Runshell("GenGtagsFiles", "gtags -f $PWD/gtags.files")
+endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
 
 "back to reviews
@@ -130,15 +153,14 @@ endif
 ":cs find f /*Find this file:
 ":cs find i /*Find files #including this file:
 
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
@@ -229,11 +251,15 @@ syntax on " auto highlight grammar
 " Nerd Tree: file system explorer
 """"""""""""""""""""""""""""""
 " Bundle 'scrooloose/nerdtree'
+" I.......Toggle whether hidden files displayed
+" F.......Toggle whether files are displayed
 let NERDChristmasTree=0
 let NERDTreeWinSize=30
 let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+" let NERDTreeIgnore=['.d$[[dir]]', '.o$[[file]]']
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.exe$', '\.o$']
 " let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
+let NERDTreeShowHidden=1
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "right"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
@@ -256,7 +282,8 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
 " Open CtrlP in find Most-Recently-Used file mode.
-map <leader>f :CtrlPMRU<CR>
+" mark.vim already used "<leader>r"
+map <leader>cr :CtrlPMRU<CR>
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|o)$',
