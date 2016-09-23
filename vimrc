@@ -1,7 +1,9 @@
 source ~/.vim/bundles.vim
-""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " Basic Setting
 """"""""""""""""""""""""""""""
+syntax on " auto highlight grammar
 set number " display line num
 set relativenumber " display relate line number
 set hlsearch " highlight search result
@@ -12,6 +14,10 @@ set ff=unix
 set ts=4
 set history=10000
 set shiftwidth=4
+"back to reviews
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " Key Remap
@@ -41,6 +47,12 @@ nnoremap ; :
 :command Qa qa
 :command QA qa
 
+" map save and quit
+nmap <leader>w :w<cr>
+nmap <leader>q :q<cr>
+nmap <leader>wq :wq<cr>
+
+
 " Keybindings for plugin toggle
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
@@ -64,10 +76,21 @@ nmap  <D-/> :
 nmap <leader>] :vertical resize +4<cr>
 nmap <leader>[ :vertical resize -4<cr>
 
-" map save and quit
-nmap <leader>w :w<cr>
-nmap <leader>q :q<cr>
-nmap <leader>wq :wq<cr>
+" gtags cscope
+nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+" nmap <leader>b :execute 'b' v:count<cr>
+
+"commit key "="
+map <leader>= I/* A */j
+map <leader>- ^xxx$xxx
+
 
 "auto complete the partner and move cursor to the middle in INSERT mode
 :inoremap ) ()<Esc>i
@@ -80,6 +103,17 @@ nmap <leader>wq :wq<cr>
 :inoremap > <><Esc>i
 :inoremap ' ''<Esc>i
 
+"[Ctrl]+[hjkl] to move code block
+nmap <C-j> mz:m+<cr>`z
+nmap <C-k> mz:m-2<cr>`z
+vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
+" Functions
+""""""""""""""""""""""""""""""
 function! Runshell(Msg, Shell)
     echo a:Msg . '...'
     call system(a:Shell)
@@ -91,20 +125,6 @@ function! GenGtagsFile()
 	call Runshell("GenGtagsFiles", "gtags -f $PWD/gtags.files")
 endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
-
-"back to reviews
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-""""""""""""""""""""""""""""""
-
-"commit key "="
-map <leader>= I/* A */j
-map <leader>- ^xxx$xxx
-
-"[Ctrl]+[hjkl] to move code block
-nmap <C-j> mz:m+<cr>`z
-nmap <C-k> mz:m-2<cr>`z
-vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
@@ -152,16 +172,8 @@ endif
 ":cs find e /*Find this egrep pattern:
 ":cs find f /*Find this file:
 ":cs find i /*Find files #including this file:
-
-nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-" nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 "omnicppcomplete.vim configure
@@ -207,8 +219,8 @@ let loaded_gtags_multi_window = 1
 "noremap <A-r> :Gtags -r<CR>
 "noremap <A-o> :Gtags -s<CR>
 "noremap <A-g> :Gtags -g<CR>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " Tagbar, better than taglist
@@ -245,7 +257,6 @@ if executable('coffeetags')
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
 
-syntax on " auto highlight grammar
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " Nerd Tree: file system explorer
@@ -264,6 +275,7 @@ let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "right"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " MiniBufExplore
 """"""""""""""""""""""""""""""
@@ -271,6 +283,7 @@ let NERDTreeWinPos = "right"
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplMapWindowNavVim = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " CtrlP
@@ -305,12 +318,19 @@ if executable('ag')
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " nerdcommenter
+""""""""""""""""""""""""""""""
 let NERDSpaceDelims=1
 " nmap <D-/> :NERDComToggleComment<cr>
 let NERDCompactSexyComs=1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
+" ack
+""""""""""""""""""""""""""""""
 " nnoremap <leader>a :Ack
 " ag tool : sudo apt-get install silversearcher-ag
 " let g:ackprg = 'ag --nogroup --color --column'
@@ -319,6 +339,7 @@ if executable('ag')
 endif
 
 " nnoremap <leader>v V`]
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
 
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
@@ -341,6 +362,7 @@ endif
 " "remap LUWalk to lw
 " nmap <silent> <leader>lw :LUWalk<cr>
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
 " Taglist, replace by Tagbar

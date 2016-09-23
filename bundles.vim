@@ -95,9 +95,12 @@ Bundle 'nvie/vim-togglemouse'
 "----------------------------------------
 "------- web backend ---------
 " Bundle '2072/PHP-Indenting-for-VIm'
-"Bundle 'tpope/vim-rails'
+" Ruby
+" Bundle 'tpope/vim-rails'
+" Phthon
 " Bundle 'lepture/vim-jinja'
-"Bundle 'digitaltoad/vim-jade'
+" HTML
+" Bundle 'digitaltoad/vim-jade'
 
 "------- web frontend ----------
 " Bundle 'othree/html5.vim'
