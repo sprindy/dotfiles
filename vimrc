@@ -133,16 +133,14 @@ endfunction
 set tags+=tags;
 " set autochdir
 set cscopetag
-" set csprg=/usr/bin/gtags-cscope
 if has("cscope")
-        " set csprg=/usr/bin/cscope
-        set csprg=/usr/bin/gtags-cscope
         set csto=1
         set cst
         set csverb
         set cspc=3
-        " if filereadable("cscope.out")
-           " cs add cscope.out
+
+" use gtags instead of ctags
+        set csprg=/usr/local/bin/gtags-cscope
         if filereadable("GTAGS")
            silent cs add GTAGS
         else
@@ -153,12 +151,16 @@ if has("cscope")
            endif
         endif
 
+" use ctags instead of gtags
+        " set csprg=/usr/bin/cscope
+        " if filereadable("cscope.out")
+        "    cs add cscope.out
         " else
-           " let cscope_file=findfile("cscope.out", ".;")
-           " let cscope_pre=matchstr(cscope_file, ".*/")
-           " if !empty(cscope_file) && filereadable(cscope_file)
-                " exe "cs add" cscope_file cscope_pre
-           " endif
+        "    let cscope_file=findfile("cscope.out", ".;")
+        "    let cscope_pre=matchstr(cscope_file, ".*/")
+        "    if !empty(cscope_file) && filereadable(cscope_file)
+        "         exe "cs add" cscope_file cscope_pre
+        "    endif
         " endif
 endif
 
@@ -297,9 +299,10 @@ let g:ctrlp_by_filename = 1
 " Open CtrlP in find Most-Recently-Used file mode.
 " mark.vim already used "<leader>r"
 map <leader>cr :CtrlPMRU<CR>
+"     'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|o)$',
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|o)$',
+    \ 'dir':  '\v[\/]\.(git|repo|hg|svn|rvm)$',
+    \ 'file': '\v(\.c|\.h|\.hh|\.s|\.cpp|\.cxx|\.java)@<!$'
     \ }
 let g:ctrlp_working_path_mode='ra'
 let g:ctrlp_match_window_bottom=1
@@ -329,7 +332,7 @@ let NERDCompactSexyComs=1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""{
-" ack
+" ack replaced by ag.vim
 """"""""""""""""""""""""""""""
 " nnoremap <leader>a :Ack
 " ag tool : sudo apt-get install silversearcher-ag
