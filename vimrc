@@ -93,15 +93,15 @@ map <leader>- ^xxx$xxx
 
 
 "auto complete the partner and move cursor to the middle in INSERT mode
-:inoremap ) ()<Esc>i
-:inoremap ( ()<Esc>i
-:inoremap { {}<Esc>i
-:inoremap } {}<Esc>i
-:inoremap [ []<Esc>i
-:inoremap ] []<Esc>i
-:inoremap < <><Esc>i
-:inoremap > <><Esc>i
-:inoremap ' ''<Esc>i
+" ":inoremap ) ()<Esc>i
+" ":inoremap ( ()<Esc>i
+" ":inoremap { {}<Esc>i
+" ":inoremap } {}<Esc>i
+" ":inoremap [ []<Esc>i
+" ":inoremap ] []<Esc>i
+" ":inoremap < <><Esc>i
+" ":inoremap > <><Esc>i
+" ":inoremap ' ''<Esc>i
 
 "[Ctrl]+[hjkl] to move code block
 nmap <C-j> mz:m+<cr>`z
