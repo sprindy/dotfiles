@@ -62,7 +62,9 @@ nmap <F5> :TagbarToggle<cr>
 let g:ctrlp_map = '<F6>'
 "nmap <F7> :call Runshell("Generate tags","ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
 " nmap <F7> :call Runshell("Generate tags","gtags")<cr>
-nmap <F7> :call GenGtagsFile()<cr><cr>
+"nmap <F7> :call GenGtagsFile()<cr><cr>
+nmap <F7> :call Runshell("GenTagFileList", "source $PWD/gtags_file.sh")<cr>
+nmap <F8> :call Runshell("GenGtags", "gtags -f $PWD/gtags_files")<cr>
 " nmap <F8> :call Runshell("Generate cscope","cscope -Rbk")<cr>:cs reset<cr><cr>
 " can't update from gtags.files
 " nmap <F8> :call Runshell("Generate gtags","global -u")<cr>:cs reset<cr><cr>: echo "globl update done ..." <cr>
@@ -121,7 +123,7 @@ function! Runshell(Msg, Shell)
 endfunction
 
 function! GenGtagsFile()
-	call Runshell("GenGtagsFileList", "find $PWD -path \"$PWD/bootloader*\" -prune -o -name \"*.[chxsS]\" -print >$PWD/gtags.files")
+	call Runshell("GenGtagsFileList", "find $PWD -name \"*.[chxsS]\" -print >$PWD/gtags.files")
 	call Runshell("GenGtagsFiles", "gtags -f $PWD/gtags.files")
 endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
