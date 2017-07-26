@@ -43,3 +43,15 @@ Branch master set up to track remote branch master from origin.
 	[branch "master"]
 		remote = origin
 		merge = refs/heads/master
+
+6. install vundle
+	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+	vim ~/.vimrc
+	:BundleInstall
+
+7. install global
+	tar -xf ./tools/global-6.5.7.tar.gz
+	cd ./tools/global-6.5.7/
+	./configure --with-sqlite3 && make -j4 && sudo make install
+
+8. ln -s .vim/vimrc ~/.vimrc
