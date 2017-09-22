@@ -19,3 +19,11 @@ sudo apt-get install \
 	ctags texinfo \
 	samba smbclient silversearcher-ag \
 	python-usb
+
+# Fix for auto complete in adb command.
+# https://github.com/mbrubeck/android-completion/blob/master/android
+sudo cp ./bin/adb.txt /bin/
+	echo "if [ -e /bin/adb.txt ] ; then" >> /home/sprindy/.bashrc
+	echo "  source /bin/adb.txt" 		 >> /home/sprindy/.bashrc
+	echo "fi" 							 >> /home/sprindy/.bashrc
+source ~/.bashrc
