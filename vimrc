@@ -306,7 +306,10 @@ let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|repo|hg|svn|rvm)$',
     \ 'file': '\v(\.c|\.h|\.hh|\.s|\.cpp|\.cxx|\.java)@<!$'
     \ }
-let g:ctrlp_working_path_mode='ra'
+" use the path where is a .git
+" let g:ctrlp_working_path_mode='ra'
+" use the path where vim open
+let g:ctrlp_working_path_mode='0'
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
