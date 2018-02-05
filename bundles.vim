@@ -1,18 +1,19 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 " +++ vimproc script
-set rtp+=~/.vim/vimproc/
+""""set rtp+=~/.vim/vimproc/
 " --- end vimproc
 
-call vundle#rc()
+call vundle#begin()
 
 " Bundle 'gtags_mwin.vim'
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
+" Bundle 'gmarik/vundle'
 
 " My Bundles here:
 " original repos on github

@@ -5,6 +5,7 @@ Manage sprindy's dotfiles/config
 $ git init
 $ git config --global user.name "sprindy"
 $ git config --global user.email  "sprindy.liu@gmail.com"
+$ git config --global core.editor "vim"
 $ git remote add origin git@github.com:sprindy/dotfiles.git
 $ git branch --set-upstream-to=origin/master 
 Branch master set up to track remote branch master from origin.
@@ -45,7 +46,7 @@ Branch master set up to track remote branch master from origin.
 		merge = refs/heads/master
 
 6. install vundle
-	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim ~/.vimrc
 	:BundleInstall
 
